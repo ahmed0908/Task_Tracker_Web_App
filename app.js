@@ -5,6 +5,10 @@ const mongoose = require('mongoose')
 const bodyParser = require('body-parser')
 const methodOverride = require('method-override')
 
+
+// DB Config
+const db = require('./config/database');
+
 // Handlebars Middleware
 app.engine('handlebars', exphbs({
   defaultLayout: 'main'
@@ -15,7 +19,8 @@ app.set('view engine', 'handlebars');
 //maping global promise-get rid of warning
  mongoose.Promise = global.Promise
  //connect to mongoose
- mongoose.connect('mongodb://ahmed0908:Profession2017*@ds159866.mlab.com:59866/tasktracker-app', {
+ //db.mongoURI
+ mongoose.connect('mongodb://localhost/tasktracker-dev', {
    useMongoClient: true
  }).then(function(){
    console.log('mongodb connected----')
@@ -167,9 +172,9 @@ app.get('/tasks/index', function(req, res){
 })
 
 
-
+//process.env.PORT || 5000
 //setting up the port
-const port = process.env.POR || 5000
+const port = 5000
 app.listen(port, function() {
   console.log(`Server has started on port ${port}`)
 })
